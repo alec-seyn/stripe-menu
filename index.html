@@ -1,0 +1,522 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Stripe Challenge</title>
+	<meta name="description" content="Stripe Challenge">
+	<meta name="author" content="Alec Seynaeve">
+	<meta name="viewport" content="width=device-width">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+HK&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css"/>
+</head>
+
+<body>
+	<div class="container">
+		<div class="stripe-style-menu">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand" href="#">
+					<svg width="62" height="25" fill="white"><title>Stripe</title><path d="M5 10.1c0-.6.6-.9 1.4-.9 1.2 0 2.8.4 4 1.1V6.5c-1.3-.5-2.7-.8-4-.8C3.2 5.7 1 7.4 1 10.3c0 4.4 6 3.6 6 5.6 0 .7-.6 1-1.5 1-1.3 0-3-.6-4.3-1.3v3.8c1.5.6 2.9.9 4.3.9 3.3 0 5.5-1.6 5.5-4.5.1-4.8-6-3.9-6-5.7zM29.9 20h4V6h-4v14zM16.3 2.7l-3.9.8v12.6c0 2.4 1.8 4.1 4.1 4.1 1.3 0 2.3-.2 2.8-.5v-3.2c-.5.2-3 .9-3-1.4V9.4h3V6h-3V2.7zm8.4 4.5L24.6 6H21v14h4v-9.5c1-1.2 2.7-1 3.2-.8V6c-.5-.2-2.5-.5-3.5 1.2zm5.2-2.3l4-.8V.8l-4 .8v3.3zM61.1 13c0-4.1-2-7.3-5.8-7.3s-6.1 3.2-6.1 7.3c0 4.8 2.7 7.2 6.6 7.2 1.9 0 3.3-.4 4.4-1.1V16c-1.1.6-2.3.9-3.9.9s-2.9-.6-3.1-2.5H61c.1-.2.1-1 .1-1.4zm-7.9-1.5c0-1.8 1.1-2.5 2.1-2.5s2 .7 2 2.5h-4.1zM42.7 5.7c-1.6 0-2.5.7-3.1 1.3l-.1-1h-3.6v18.5l4-.7v-4.5c.6.4 1.4 1 2.8 1 2.9 0 5.5-2.3 5.5-7.4-.1-4.6-2.7-7.2-5.5-7.2zm-1 11c-.9 0-1.5-.3-1.9-.8V10c.4-.5 1-.8 1.9-.8 1.5 0 2.5 1.6 2.5 3.7 0 2.2-1 3.8-2.5 3.8z"></path></svg>
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".popup">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item has-dropdown" data-content="products">
+							<a class="nav-link" href="#">Products</a>
+						</li>
+						<li class="nav-item has-dropdown" data-content="developers">
+							<a class="nav-link" href="#">Developers</a>
+						</li>
+						<li class="nav-item has-dropdown" data-content="company">
+							<a class="nav-link" href="#">Company</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Pricing</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+			
+			<div class="morph-dropdown-wrapper">
+				<div class="dropdown-list">
+					<div id="products" class="dropdown" style="width: 495px; height: 525px;">
+						<div class="dropdown-content">
+							<div class="link-group">
+								<div class="products-group-primary">
+									<a class="link-container item-payments" href="https://stripe.com/en-be/payments">
+										<div class="row">
+											<div class="col-md-2">
+												<svg width="50" height="50"><path fill="#87BBFD" class="hover-fillLight" d="M24 48C12.11 48 2.244 39.35.338 28H6.5V9H5.27C9.67 3.515 16.423 0 24 0c13.255 0 24 10.745 24 24S37.255 48 24 48z"></path><path fill="#555ABF" class="hover-fillDark" d="M25 21v8H.526A24.082 24.082 0 0 1 0 24 23.908 23.908 0 0 1 6.116 8H31.5c.828 0 1.5.67 1.5 1.5V21h-8zm-10.502-8.995a6.497 6.497 0 1 0 0 12.994 6.497 6.497 0 0 0 0-12.996z"></path><path fill="#FFF" d="M39.823 39.276a2.44 2.44 0 0 1-1.76.724H16.5a1.5 1.5 0 0 1-1.5-1.5v-18c0-.828.67-1.5 1.5-1.5h27.693a1.51 1.51 0 0 1 1.484 1.256c.21 1.217.323 2.467.323 3.744 0 5.936-2.355 11.32-6.177 15.276zM33.5 23.002a6.497 6.497 0 1 0 0 12.995 6.497 6.497 0 0 0 .002-12.994z"></path></svg>
+											</div>
+											<div class="product-link-content col-md-10">
+												<h3 class="link-title">Payments</h3>
+												<p class="link-sub">A complete payments platform engineered for&nbsp;growth.</p>
+											</div>
+										</div>
+									</a>
+									<a class="link-container item-subscriptions" href="https://stripe.com/en-be/billing">
+										<div class="row">
+											<div class="col-md-2">
+												<svg width="50" height="50"><path fill="#74E4A2" class="hover-fillLight" d="M24 0c13.255 0 24 10.745 24 24S37.255 48 24 48 0 37.255 0 24 10.745 0 24 0z"></path><path fill="#FFF" d="M39.558 30.977c-6.23 6.225-16.304 6.194-22.535-.03l13.975-13.962c-6.232-6.224-16.335-6.224-22.567 0-4.043 4.04-5.456 9.712-4.247 14.896l-.654.174a21.89 21.89 0 0 1-1.536-8.61c.284-11.806 10.003-21.35 21.823-21.446 6.15-.05 11.72 2.42 15.744 6.438 6.23 6.226 6.23 16.318 0 22.542z"></path><path fill="#159570" class="hover-fillDark" d="M33.653 21.413c1.43 5.336-1.735 10.82-7.068 12.25-5.332 1.43-10.814-1.736-12.242-7.072-1.43-5.334 1.735-10.82 7.068-12.25 5.334-1.43 10.815 1.738 12.244 7.074z"></path></svg>
+											</div>
+											<div class="product-link-content col-md-10">
+												<h3 class="link-title">Billing</h3>
+												<p class="link-sub">Build and scale your recurring business&nbsp;model.</p>
+											</div>
+										</div>
+									</a>
+									<a class="link-container item-connect" href="https://stripe.com/en-be/connect">
+										<div class="row">	
+											<div class="col-md-2">										
+												<svg width="50" height="50"><path fill="#68D4F8" class="hover-fillLight" d="M48 24c0 13.255-10.745 24-24 24S0 37.255 0 24 10.745 0 24 0c1.363 0 2.698.12 4 .338V15h5v5h14.662c.218 1.302.338 2.637.338 4z"></path><path fill="#FFF" d="M16.99 29.966L17 17l-5.55-.006a1.02 1.02 0 0 0-.725.3L2.65 25.446a1.55 1.55 0 0 0-.44 1.28c1.22 9.944 9.1 17.825 19.042 19.047.472.058.945-.104 1.28-.44l8.172-8.076c.192-.193.3-.453.3-.725L31 31l-12.985-.01a1.023 1.023 0 0 1-1.024-1.024z"></path><path fill="#217AB7" class="hover-fillDark" d="M47.697 20.195L37.194 30.702a1.03 1.03 0 0 1-.726.3h-5.462V18.03c0-.567-.46-1.025-1.025-1.025H16.994V11.52c0-.274.108-.534.3-.726L27.783.3C38 1.916 46.07 9.98 47.698 20.194z"></path></svg>
+											</div>	
+											<div class="product-link-content col-md-10">
+												<h3 class="link-title">Connect</h3>
+												<p class="link-sub">Everything platforms need to get sellers&nbsp;paid.</p>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div class="products-group-secondary">
+									<a class="link-container item-sigma" href="https://stripe.com/en-be/sigma">
+										<div class="row">
+											<div class="col-md-1" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path class="hover-fillLight" d="M24 48c-2.6 0-5-.3-7.2-1.1V35.2H4v2.1c-2.6-4-4-8.6-4-13.3C0 12.6 7.8 3.2 18.4.6V4h14.4V1.6C41.8 5.1 48 13.8 48 24c0 13.3-10.7 24-24 24z" fill="#beb0f4"></path><path class="hover-fillDark" d="M45.6 24H32.8v17.6H17.6v-.2 5.8c-6.4-1.8-11.7-6.1-14.9-12 2.1-6.6 8-10.9 14.9-11.2V.8C19.7.3 21.9 0 24 0c3.4 0 6.7.6 9.6 1.9v8c0 6.1 4.5 10.9 10.2 11.7 1 .2 1.8 1.3 1.8 2.4z" fill="#7356b6"></path><path d="M45.6 24c0 1.1-.8 2.1-1.8 2.2-5.8 1-10.2 5.8-10.2 11.7v5.3c-3 1.4-6.2 2.2-9.6 2.2-2.2 0-4.3-.3-6.4-1V40c0-7 5.8-13 12.5-13.8C31.2 26 32 25.1 32 24h13.6zM4 15.7C6.6 9.8 11.5 5.3 17.6 3.4V8c0 7 5.8 12.8 12.5 13.8 1.1.2 1.9 1.1 1.9 2.2H17.9C12 24 6.7 20.6 4 15.7z" fill="#FFF"></path></svg>
+											</div>
+											<div class="product-link-content col-md-11">
+												<div class="row">
+													<h3 class="link-title">Sigma</h3>
+													<p class="link-sub">Your business data at your fingertips.</p>
+												</div>
+											</div>
+										</div>
+									</a>
+									<a class="link-container item-atlas" href="https://stripe.com/en-be/atlas" data-analytics-action="atlas" data-analytics-source="nav_dropdown" tabindex="-1">
+										<div class="row">
+											<div class="col-md-1" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path fill="#FCD669" class="hover-fillLight" d="M24 0c13.255 0 24 10.745 24 24S37.255 48 24 48 0 37.255 0 24 10.745 0 24 0z"></path><path fill="#CE7C3A" class="hover-fillDark" d="M24.012 1.834c.366.005.73.196.92.575l16.825 33.72c.396.79-.314 1.685-1.175 1.48L24 33.626V1.834h.01z"></path><path fill="#FFF" d="M24 1.834v31.794l-16.584 3.98A1.043 1.043 0 0 1 6.24 36.13L23.067 2.41c.195-.39.572-.58.947-.576H24z"></path></svg>
+											</div>
+											<div class="product-link-content col-md-11">
+												<div class="row">
+													<h3 class="link-title">Atlas</h3>
+													<p class="link-sub">The best way to start an internet business.</p>
+												</div>
+											</div>
+										</div>
+									</a>
+									<a class="link-container item-radar" href="https://stripe.com/en-be/radar" data-analytics-action="radar" data-analytics-source="nav_dropdown" tabindex="-1">
+										<div class="row">
+											<div class="col-md-1" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path class="hover-fillLight" fill="#F6A4EB" d="M41.364 21.886h6.538c.06.697.098 1.4.098 2.114 0 13.255-10.745 24-24 24S0 37.255 0 24 10.745 0 24 0c6.833 0 12.993 2.86 17.364 7.442v14.444z"></path><path fill="#FFF" d="M37.746 37.4a1.3 1.3 0 0 1 .92-.38c.72 0 1.303.444 1.303 1.163 0 .503-.353.982-.708 1.292-3.484 3.122-8.325 5.53-13.783 5.53-11.75 0-19.486-9.538-19.486-18.83 0-8.72 7.195-16.19 15.25-16.19s11.227 5.54 11.227 5.54L37.747 37.4z"></path><path class="hover-fillDark" fill="#9251AC" d="M47.995 24zm0 0c0-.995-.807-1.974-1.802-1.974-1.15 0-1.8.94-1.8 1.83-.09 3.174-1.228 7.127-3.453 10.182-2.355 3.232-6.91 6.956-13.242 6.956-7.625 0-13.213-5.767-13.213-11.925 0-4.3 2.886-7.17 5.828-7.17 1.588 0 2.48.683 2.965 1.312.362.468 1.063.493 1.482.074L40.968 7.032A23.926 23.926 0 0 1 47.995 24z"></path></svg>
+											</div>
+											<div class="product-link-content col-md-11">
+												<div class="row">
+													<h3 class="link-title">Radar</h3>
+													<p class="link-sub">Fight fraud with machine learning.</p>
+												</div>
+											</div>
+										</div>
+									</a>
+									<a class="link-container item-issuing" href="https://stripe.com/en-be/issuing" data-analytics-action="issuing" data-analytics-source="nav_dropdown" tabindex="-1">
+										<div class="row">
+											<div class="col-md-1" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><g fill="none"><circle class="hover-fillLight" fill="#87BBFD" cx="24" cy="24" r="24"></circle><path fill="#FFF" d="M38.27 8H20a4 4 0 0 0-4 4v3H4.59a1 1 0 0 0-.93.61 22.5 22.5 0 0 0-1.44 5.27 1 1 0 0 0 1 1.12H16v14a4 4 0 0 0 4 4h18.27a2 2 0 0 0 1.41-.58 22 22 0 0 0 0-30.84A2 2 0 0 0 38.27 8z"></path><path class="hover-fillDark" fill="#555ABF" d="M46.25 15H16v7h31.91c-.2-2.4-.75-4.76-1.66-7z"></path></g></svg>
+											</div>
+											<div class="product-link-content col-md-11">
+												<div class="row">
+													<h3 class="link-title">Issuing</h3>
+													<p class="link-sub">Create, distribute, and manage&nbsp;cards.</p>
+												</div>
+											</div>
+										</div>
+									</a>
+									<a class="link-container item-terminal" href="https://stripe.com/en-be/terminal" data-analytics-action="terminal" data-analytics-source="nav_dropdown" tabindex="-1">
+										<div class="row">
+											<div class="col-md-1" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path class="hover-fillLight" d="M38,8H10L.19,27a24,24,0,0,0,47.62,0Z" fill="#87bbfd"></path><path d="M10,24V39.48A3,3,0,0,0,11.29,42a22,22,0,0,0,25.42,0A3,3,0,0,0,38,39.48V24Z" fill="#fff"></path><path class="hover-fillDark" d="M24,0A24,24,0,0,0,.19,27H47.81A24,24,0,0,0,24,0ZM38,21H10V14a4,4,0,0,1,4-4H34a4,4,0,0,1,4,4Z" fill="#555abf"></path></svg>
+											</div>
+											<div class="product-link-content col-md-11">
+												<div class="row">
+													<h3 class="link-title">Terminal</h3>
+													<p class="link-sub">Build your perfect point of&nbsp;sale.</p>
+												</div>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div class="products-group-tertiary" style="text-align:center">
+									<a class="link-container item-workswith" href="https://stripe.com/works-with">
+										<h3 class="link-title"><svg width="17" height="17"><path class="hover-fillLight" fill="#87BBFD" d="M15.998 12.495a1.03 1.03 0 0 1-.595.908L8.93 16.395a1.018 1.018 0 0 1-.86 0l-6.473-2.992a1.03 1.03 0 0 1-.594-.908V4.51c.006-.2.07-.39.18-.55L8.5 7.338l7.32-3.38c.108.16.172.35.178.55v7.984z"></path><path class="hover-fillDark" fill="#6772E5" d="M15.998 12.495a1.03 1.03 0 0 1-.595.908L8.93 16.395a1.026 1.026 0 0 1-.43.095V7.34l7.32-3.38c.11.16.173.35.18.55v7.984z"></path><path class="hover-fillLight" fill="#87BBFD" d="M8.5 5C6.567 5 5 4.228 5 3.275v-1.15h.098c.36.768 1.742 1.34 3.402 1.34 1.66.002 3.043-.572 3.402-1.34H12v1.15C12 4.228 10.433 5 8.5 5z"></path></svg> Works with Stripe</h3>
+									</a>
+								</div>
+							</div>
+						</div>					
+					</div>
+					<div id="developers" class="dropdown" style="width: 393px; height: 350px;">
+						<div class="dropdown-content" >
+							<div class="link-group documentation-group">
+								<a class="link-container withIcon item-documentation" href="https://stripe.com/docs">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="17"><path fill="#87BBFD" class="hover-fillLight" d="M.945 1.998h3.632C6.744 1.998 8.5 3.005 8.5 4.83v11.583c-.512 0-1.015-.337-1.33-.59-1.03-.828-3.057-.828-5.222-.828H.945A.944.944 0 0 1 0 14.052V2.944C0 2.422.423 2 .945 2z"></path><path fill="#6772E5" class="hover-fillDark" d="M16.055 1.998h-3.632C10.257 1.998 8.5 3.005 8.5 4.83v11.583c.512 0 1.015-.337 1.33-.59 1.03-.828 3.057-.828 5.222-.828h1.003A.944.944 0 0 0 17 14.05V2.945A.944.944 0 0 0 16.055 2z"></path></svg> 
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title">Documentation</h3>
+											<span class="link-sub">Start integrating Stripe’s products and&nbsp;tools.</span>
+										</div>
+									</div>
+								</a>
+								<div class="documentation-articles">
+									<div class="row">
+										<div class="col-md-1"></div>
+										<div class="col-md-5">
+											<h4 class="link-title-small">Get started</h4>
+											<div>
+												<a href="https://stripe.comhttps://stripe.com/docs/stripe-js" data-analytics-action="docs_elements" data-analytics-source="nav_dropdown" tabindex="-1">
+													Elements
+												</a>
+											</div>
+											<div>
+												<a href="https://stripe.com/docs/payments/checkout">
+													Checkout
+												</a>
+											</div>
+											<div>
+												<a href="https://stripe.com/docs/mobile">
+													Mobile apps
+												</a>
+											</div>
+											<div>
+												<a href="https://stripe.com/docs/libraries">
+													Libraries
+												</a>
+											</div>
+										</div>
+										<div class="col-md-5">
+											<h4 class="link-title-small">Popular topics</h4>
+											<div>
+												<a href="https://stripe.com/docs/apple-pay">
+													Apple Pay
+												</a>
+											</div>
+											<div>
+												<a href="https://stripe.com/docs/testing">
+													Testing
+												</a>
+											</div>
+											<div>
+												<a href="https://stripe.com/docs/checklist">
+													Launch checklist
+												</a>
+											</div>
+											<div>
+												<a href="https://stripe.com/docs/libraries#third-party-plugins">
+													Plug-ins
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="link-group link-list developers-group">
+								<a class="link-container item-api-reference" href="https://stripe.com/docs/api">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="17"><path d="M2 15h13M2 11h13M2 7h13M2 3h13" fill="none" stroke="#6772e5" class="hover-strokeDark" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title">Full API Reference</h3>
+										</div>
+									</div>
+								</a>
+								<a class="link-container item-api-status" href="https://status.stripe.com">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="17"><path d="M1 9h2.95l3-6.5 3 12 3-5.45L16 9" fill="none" stroke="#6772e5" class="hover-strokeDark" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title">API Status</h3>
+										</div>
+									</div>
+								</a>
+								<a class="link-container item-openSource" href="https://stripe.com/en-be/open-source">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="17"><path fill="#6772E5" class="hover-fillDark" d="M8.5 17a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17zM6.987 6.078a.684.684 0 0 0-.968-.968L3.116 8.012a.684.684 0 0 0 0 .967l2.9 2.9a.684.684 0 0 0 .97-.967l-2.42-2.418 2.42-2.42zm6.996 1.95L11.08 5.123a.684.684 0 0 0-.966.968l2.418 2.42-2.418 2.417a.684.684 0 0 0 .967.967l2.904-2.902a.684.684 0 0 0 0-.966z"></path></svg>
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title">Open Source</h3>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>	
+					</div>	
+					<div id="company" class="dropdown" style="width: 422px; height: 466px;">
+						<div class="dropdown-content">
+							<div class="link-group link-list company-group">
+								<a class="link-container item-about" href="https://stripe.com/en-be/about">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="17"><path fill="#6772E5" class="hover-fillDark" d="M8.5 17a8.5 8.5 0 1 1 0-17 8.5 8.5 0 0 1 0 17zm.178-10.89c.76 0 1.726.278 2.486.69V4.443c-.828-.33-1.656-.502-2.484-.502-2.028 0-3.41 1.06-3.41 2.83 0 2.77 3.8 2.32 3.8 3.513 0 .462-.37.612-.93.612-.827 0-1.867-.366-2.706-.823v2.388c.93.4 1.843.592 2.705.592 2.077 0 3.48-1.027 3.48-2.827 0-2.98-3.82-2.447-3.82-3.572-.003-.39.352-.542.877-.542z"></path></svg>
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title">About Stripe</h3>
+										</div>
+									</div>
+								</a>	 
+								<a class="link-container item-customers" href="https://stripe.com/en-be/customers">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="17"><path fill="#87BBFD" class="hover-fillLight" d="M2 16a1 1 0 0 1-1-1V9a4 4 0 0 1 8 0v7H2zm3-9a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"></path><path fill="#6772E5" class="hover-fillDark" d="M15 16H9a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h.55a2.5 2.5 0 0 1 4.9 0H15a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1z"></path><path fill="#87BBFD" class="hover-fillLight" d="M11 12h2v4h-2v-4z"></path></svg>
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title">Customers</h3>
+										</div>
+									</div>
+								</a>
+								<a class="link-container item-partner-program" href="https://stripe.com/en-be/partner-program">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="17"> <path class="hover-fillLight" fill="#87bbfd" d="M4.67 10.94A1.6 1.6 0 0 1 5.9 9.05l10.92-2.32a8.47 8.47 0 0 0-1.28-2.98l-5.1 1.08a1.6 1.6 0 0 1 .66 3.12L.18 10.27a8.47 8.47 0 0 0 1.28 2.99l7.18-1.53a1.6 1.6 0 0 1 .67 3.12L4.34 15.9a8.49 8.49 0 0 0 12.53-5.92l-10.3 2.2a1.6 1.6 0 0 1-1.9-1.24zM7.5 3.82a1.6 1.6 0 0 1 1.23-1.89l3.93-.83A8.49 8.49 0 0 0 .13 7.02L9.4 5.05a1.6 1.6 0 0 1-1.9-1.23z"></path> <path class="hover-fillDark" fill="#555abf" d="M7.5 3.82a1.6 1.6 0 0 0 1.9 1.23l1.04-.22 5.1-1.08a8.5 8.5 0 0 0-2.88-2.65l-3.93.83a1.6 1.6 0 0 0-1.22 1.9zm9.32 2.91L5.9 9.05a1.6 1.6 0 1 0 .66 3.12l10.3-2.19a8.47 8.47 0 0 0-.04-3.25z"></path> <path fill="#fff" d="M12.33 6.06a1.6 1.6 0 0 0-1.9-1.23l-1.03.22L.13 7.02a8.47 8.47 0 0 0 .05 3.25L11.1 7.95a1.6 1.6 0 0 0 1.23-1.9z"></path> <path fill="#fff" d="M9.4 5.05l1.04-.22-1.04.22zm1.13 7.91a1.6 1.6 0 0 0-1.89-1.23l-7.18 1.53a8.5 8.5 0 0 0 2.88 2.64l4.97-1.05a1.6 1.6 0 0 0 1.22-1.9z"></path> </svg>
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title">Partner Program</h3>
+										</div>
+									</div>
+								</a>
+								<a class="link-container item-jobs" href="https://stripe.com/en-be/jobs">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="17"><path fill="#6772E5" class="hover-fillDark" d="M1.5 4h14c.828 0 1.5.67 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 0 13.5v-8C0 4.67.67 4 1.5 4z"></path><path fill="#87BBFD" class="hover-fillLight" d="M13 15V4h2v11h-2zM2 4h2v11H2V4z"></path><path fill="#6772E5" class="hover-fillDark" d="M11.5 3.5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1V4H4v-.5A2.5 2.5 0 0 1 6.5 1h4A2.5 2.5 0 0 1 13 3.5V4h-1.5v-.5z"></path></svg>
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title">Jobs</h3>
+										</div>
+									</div>
+								</a>
+								<a class="link-container item-environment" href="https://stripe.com/en-be/environment">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="17"><path class="hover-fillLight" fill="#87BBFD" d="M16.17 1.51c-4.33 6.16-7.92 9.65-12.88 11.91-.32-1.3-1.38-6.55 1.27-9.27 2.76-2.82 6.83-1.68 10.73-2.9a.8.8 0 0 1 .88.26z"></path><path class="hover-fillDark" fill="#6772E5" d="M1 14.37c.68-.26 1.33-.6 1.92-1.02.11-.05.22-.11.32-.18 4.61-3 8.17-6.06 12.8-11.79.19.15.29.37.28.6-.11 3.38-.57 7.9-3.13 10.52-2.33 2.38-6.84 1.83-8.83 1.45-.89.7-1.88 1.27-2.93 1.67A.66.66 0 0 1 1 14.37z"></path></svg>
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title">Environment</h3>
+										</div>
+									</div>
+								</a>
+								<a class="link-container item-newsroom" href="https://stripe.com/en-be/newsroom">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="15"><path fill="#87BBFD" class="hover-fillLight" d="M1 2h4.5v11H1.75C.78 13 0 12.22 0 11.25V3a1 1 0 0 1 1-1z"></path><path fill="#6772E5" class="hover-fillDark" d="M14 13H2v-.03c1.14-.12 2-1.08 2-2.22V1a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v9a3 3 0 0 1-3 3zm1-11h-4v4h4V2zM6 2v1h3V2H6zm0 3v1h3V5H6zm0 3v1h9V8H6z"></path></svg>
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title">Newsroom</h3>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="link-group blog-group">
+								<a class="link-container withIcon item-blog" href="https://stripe.com/en-be/blog">
+									<div class="row">
+										<div class="col-md-1">
+											<svg width="17" height="17">
+												<path fill="#6772E5" class="hover-fillDark" d="M4.5.8v6.29a1.5 1.5 0 1 0 1 0V.8L10 8l-2 7H2L0 8 4.5.8z"></path>
+												<path fill="#87BBFD" class="hover-fillLight" d="M.5 14h9c.28 0 .5.22.5.5v2a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-2c0-.28.22-.5.5-.5z"></path>
+											</svg>
+										</div>
+										<div class="col-md-11">
+											<h3 class="link-title linkIcon">From the blog</h3>
+										</div>
+									</div>
+								</a>
+								<div class="blog-posts">
+									<a href="https://stripe.com/en-be/blog/terminal-in-person-payments">
+										<div class="row">
+											<div class="col-md-1"></div>
+											<div class="blog-title">Stripe Terminal is now generally available in the US <i class="fas fa-angle-right"></i></div>
+										</div>
+									</a>
+									<a href="https://stripe.com/en-be/blog/stripe-sessions">
+										<div class="row">
+											<div class="col-md-1"></div>
+											<div class="blog-title">Stripe Sessions <i class="fas fa-angle-right"></i></div>
+										</div>
+									</a>
+									<a href="https://stripe.com/en-be/blog/intercom-and-stripe">
+										<div class="row">
+											<div class="col-md-1"></div>
+											<div class="blog-title">Intercom + Stripe <i class="fas fa-angle-right"></i></div>
+										</div>
+									</a>
+								</div>
+							  </div>
+						</div>
+					</div>
+				</div>
+				<div class="dropdown-arrow"></div>
+			</div>
+		
+			<div class="popup" style="padding-top:20px; width:500px;">
+				<div class="popup-container">
+					<div class="popup-close-button" onclick="$('.navbar-toggler').click()"><i class="fas fa-times"></i></div>
+					<div class="mobile-products">
+						<h4 class="link-title-small">Products</h4>
+						<div class="mobileProductsList">
+							<div class="row">
+								<div class="col-md-6">
+									<a class="link-container item-payments" href="https://stripe.com/en-be/payments">
+										<div class="row">
+											<div class="col-md-2" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path fill="#87BBFD" class="hover-fillLight" d="M24 48C12.11 48 2.244 39.35.338 28H6.5V9H5.27C9.67 3.515 16.423 0 24 0c13.255 0 24 10.745 24 24S37.255 48 24 48z"></path><path fill="#555ABF" class="hover-fillDark" d="M25 21v8H.526A24.082 24.082 0 0 1 0 24 23.908 23.908 0 0 1 6.116 8H31.5c.828 0 1.5.67 1.5 1.5V21h-8zm-10.502-8.995a6.497 6.497 0 1 0 0 12.994 6.497 6.497 0 0 0 0-12.996z"></path><path fill="#FFF" d="M39.823 39.276a2.44 2.44 0 0 1-1.76.724H16.5a1.5 1.5 0 0 1-1.5-1.5v-18c0-.828.67-1.5 1.5-1.5h27.693a1.51 1.51 0 0 1 1.484 1.256c.21 1.217.323 2.467.323 3.744 0 5.936-2.355 11.32-6.177 15.276zM33.5 23.002a6.497 6.497 0 1 0 0 12.995 6.497 6.497 0 0 0 .002-12.994z"></path></svg>
+											</div>
+											<div class="col-md-10">
+												<h3 class="link-title">Payments</h3>
+											</div>
+										</div>
+									</a>
+									<a class="link-container item-subscriptions" href="https://stripe.com/en-be/billing">
+										<div class="row">
+											<div class="col-md-2" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path fill="#74E4A2" class="hover-fillLight" d="M24 0c13.255 0 24 10.745 24 24S37.255 48 24 48 0 37.255 0 24 10.745 0 24 0z"></path><path fill="#FFF" d="M39.558 30.977c-6.23 6.225-16.304 6.194-22.535-.03l13.975-13.962c-6.232-6.224-16.335-6.224-22.567 0-4.043 4.04-5.456 9.712-4.247 14.896l-.654.174a21.89 21.89 0 0 1-1.536-8.61c.284-11.806 10.003-21.35 21.823-21.446 6.15-.05 11.72 2.42 15.744 6.438 6.23 6.226 6.23 16.318 0 22.542z"></path><path fill="#159570" class="hover-fillDark" d="M33.653 21.413c1.43 5.336-1.735 10.82-7.068 12.25-5.332 1.43-10.814-1.736-12.242-7.072-1.43-5.334 1.735-10.82 7.068-12.25 5.334-1.43 10.815 1.738 12.244 7.074z"></path></svg>
+											</div>
+											<div class="col-md-10">
+												<h3 class="link-title">Billing</h3>
+											</div>
+										</div>
+									</a>
+									<a class="link-container item-connect" href="https://stripe.com/en-be/connect">
+										<div class="row">
+											<div class="col-md-2" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path fill="#68D4F8" class="hover-fillLight" d="M48 24c0 13.255-10.745 24-24 24S0 37.255 0 24 10.745 0 24 0c1.363 0 2.698.12 4 .338V15h5v5h14.662c.218 1.302.338 2.637.338 4z"></path><path fill="#FFF" d="M16.99 29.966L17 17l-5.55-.006a1.02 1.02 0 0 0-.725.3L2.65 25.446a1.55 1.55 0 0 0-.44 1.28c1.22 9.944 9.1 17.825 19.042 19.047.472.058.945-.104 1.28-.44l8.172-8.076c.192-.193.3-.453.3-.725L31 31l-12.985-.01a1.023 1.023 0 0 1-1.024-1.024z"></path><path fill="#217AB7" class="hover-fillDark" d="M47.697 20.195L37.194 30.702a1.03 1.03 0 0 1-.726.3h-5.462V18.03c0-.567-.46-1.025-1.025-1.025H16.994V11.52c0-.274.108-.534.3-.726L27.783.3C38 1.916 46.07 9.98 47.698 20.194z"></path></svg>
+											</div>
+											<div class="col-md-10">
+												<h3 class="link-title">Connect</h3>
+											</div>
+										</div>
+									</a>
+									<a class="link-container item-sigma" href="https://stripe.com/en-be/sigma">
+										<div class="row">
+											<div class="col-md-2" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path class="hover-fillLight" d="M24 48c-2.6 0-5-.3-7.2-1.1V35.2H4v2.1c-2.6-4-4-8.6-4-13.3C0 12.6 7.8 3.2 18.4.6V4h14.4V1.6C41.8 5.1 48 13.8 48 24c0 13.3-10.7 24-24 24z" fill="#beb0f4"></path><path class="hover-fillDark" d="M45.6 24H32.8v17.6H17.6v-.2 5.8c-6.4-1.8-11.7-6.1-14.9-12 2.1-6.6 8-10.9 14.9-11.2V.8C19.7.3 21.9 0 24 0c3.4 0 6.7.6 9.6 1.9v8c0 6.1 4.5 10.9 10.2 11.7 1 .2 1.8 1.3 1.8 2.4z" fill="#7356b6"></path><path d="M45.6 24c0 1.1-.8 2.1-1.8 2.2-5.8 1-10.2 5.8-10.2 11.7v5.3c-3 1.4-6.2 2.2-9.6 2.2-2.2 0-4.3-.3-6.4-1V40c0-7 5.8-13 12.5-13.8C31.2 26 32 25.1 32 24h13.6zM4 15.7C6.6 9.8 11.5 5.3 17.6 3.4V8c0 7 5.8 12.8 12.5 13.8 1.1.2 1.9 1.1 1.9 2.2H17.9C12 24 6.7 20.6 4 15.7z" fill="#FFF"></path></svg>
+											</div>
+											<div class="col-md-10">
+												<h3 class="link-title">Sigma</h3>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div class="col-md-6">
+									<a class="link-container item-atlas" href="https://stripe.com/en-be/atlas">
+										<div class="row">
+											<div class="col-md-2" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path fill="#FCD669" class="hover-fillLight" d="M24 0c13.255 0 24 10.745 24 24S37.255 48 24 48 0 37.255 0 24 10.745 0 24 0z"></path><path fill="#CE7C3A" class="hover-fillDark" d="M24.012 1.834c.366.005.73.196.92.575l16.825 33.72c.396.79-.314 1.685-1.175 1.48L24 33.626V1.834h.01z"></path><path fill="#FFF" d="M24 1.834v31.794l-16.584 3.98A1.043 1.043 0 0 1 6.24 36.13L23.067 2.41c.195-.39.572-.58.947-.576H24z"></path></svg>
+											</div>
+											<div class="col-md-10">
+												<h3 class="link-title">Atlas</h3>
+											</div>
+										</div>
+									</a>
+									<a class="link-container item-radar" href="https://stripe.com/en-be/radar">
+										<div class="row">
+											<div class="col-md-2" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path class="hover-fillLight" fill="#F6A4EB" d="M41.364 21.886h6.538c.06.697.098 1.4.098 2.114 0 13.255-10.745 24-24 24S0 37.255 0 24 10.745 0 24 0c6.833 0 12.993 2.86 17.364 7.442v14.444z"></path><path fill="#FFF" d="M37.746 37.4a1.3 1.3 0 0 1 .92-.38c.72 0 1.303.444 1.303 1.163 0 .503-.353.982-.708 1.292-3.484 3.122-8.325 5.53-13.783 5.53-11.75 0-19.486-9.538-19.486-18.83 0-8.72 7.195-16.19 15.25-16.19s11.227 5.54 11.227 5.54L37.747 37.4z"></path><path class="hover-fillDark" fill="#9251AC" d="M47.995 24zm0 0c0-.995-.807-1.974-1.802-1.974-1.15 0-1.8.94-1.8 1.83-.09 3.174-1.228 7.127-3.453 10.182-2.355 3.232-6.91 6.956-13.242 6.956-7.625 0-13.213-5.767-13.213-11.925 0-4.3 2.886-7.17 5.828-7.17 1.588 0 2.48.683 2.965 1.312.362.468 1.063.493 1.482.074L40.968 7.032A23.926 23.926 0 0 1 47.995 24z"></path></svg>
+											</div>
+											<div class="col-md-10">
+												<h3 class="link-title">Radar</h3>
+											</div>
+										</div>									
+									</a>
+									<a class="link-container item-issuing" href="https://stripe.com/en-be/issuing">
+										<div class="row">
+											<div class="col-md-2" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><g fill="none"><circle class="hover-fillLight" fill="#87BBFD" cx="24" cy="24" r="24"></circle><path fill="#FFF" d="M38.27 8H20a4 4 0 0 0-4 4v3H4.59a1 1 0 0 0-.93.61 22.5 22.5 0 0 0-1.44 5.27 1 1 0 0 0 1 1.12H16v14a4 4 0 0 0 4 4h18.27a2 2 0 0 0 1.41-.58 22 22 0 0 0 0-30.84A2 2 0 0 0 38.27 8z"></path><path class="hover-fillDark" fill="#555ABF" d="M46.25 15H16v7h31.91c-.2-2.4-.75-4.76-1.66-7z"></path></g></svg>
+											</div>
+											<div class="col-md-10">
+												<h3 class="link-title">Issuing</h3>
+											</div>
+										</div>							
+									</a>
+									<a class="link-container item-terminal" href="https://stripe.com/en-be/terminal">
+										<div class="row">
+											<div class="col-md-2" style="margin-left:-10px;margin-top:-10px">
+												<svg width="50" height="50" transform="scale(0.5)"><path class="hover-fillLight" d="M38,8H10L.19,27a24,24,0,0,0,47.62,0Z" fill="#87bbfd"></path><path d="M10,24V39.48A3,3,0,0,0,11.29,42a22,22,0,0,0,25.42,0A3,3,0,0,0,38,39.48V24Z" fill="#fff"></path><path class="hover-fillDark" d="M24,0A24,24,0,0,0,.19,27H47.81A24,24,0,0,0,24,0ZM38,21H10V14a4,4,0,0,1,4-4H34a4,4,0,0,1,4,4Z" fill="#555abf"></path></svg>
+											</div>
+											<div class="col-md-10">
+												<h3 class="link-title">Terminal</h3>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="mobile-line" style="height:3px"></div>
+					<div class="mobile-secondary-nav">
+						<div class="row">
+							<div class="col-md-6">
+								<div>
+									<a class="item-pricing" href="https://stripe.com/en-be/pricing">
+										Pricing
+									</a>
+								</div>
+								<div>
+									<a class="item-workswith" href="https://stripe.com/works-with">
+										Works with Stripe
+									</a>
+								</div>
+								<div>
+									<a class="item-partner-program" href="https://stripe.com/en-be/partner-program">
+										Partner Program
+									</a>
+								</div>
+								<div>
+									<a class="item-documentation" href="https://stripe.com/docs">
+										Documentation
+									</a>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div>
+									<a class="item-about" href="https://stripe.com/en-be/about">
+										About Stripe
+									</a>
+								</div>
+								<div>
+									<a class="item-jobs" href="https://stripe.com/en-be/jobs">
+										Jobs
+									</a>
+								</div>
+								<div>
+									<a class="item-newsroom" href="https://stripe.com/en-be/newsroom">
+										Newsroom
+									</a>
+								</div>
+								<div>
+									<a class="item-blog" href="https://stripe.com/en-be/blog">
+										Blog
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="mobile-sign-in">
+						<a href="https://dashboard.stripe.com/login">
+							Sign in <i class="fas fa-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/script.js"></script>	
+</body>
+</html>
